@@ -1,0 +1,501 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPCAGHsGXeEnW7GhTrLFez3",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/UrsKindler/python_in_MS/blob/main/DA%20106.1.3\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 8,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "P3Ud8kycF3B3",
+        "outputId": "ed12e554-c82d-4c92-aaf7-96bffa78e8f3"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Band           Iron Maiden\n",
+            "Country                 UK\n",
+            "Year Formed           1975\n",
+            "Genre          Heavy Metal\n",
+            "Name: IM, dtype: object\n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    'Band': ['Black Sabbath', 'Iron Maiden', 'Metallica', 'Slayer',\n",
+        "             'Megadeth'],\n",
+        "    'Country': ['UK', 'UK', 'USA', 'USA', 'USA'],\n",
+        "    'Year Formed': [1968, 1975, 1981, 1981, 1983],\n",
+        "    'Genre': ['Heavy Metal', 'Heavy Metal', 'Thrash Metal',\n",
+        "              'Thrash Metal', 'Thrash Metal'],\n",
+        "    }\n",
+        "df = pd.DataFrame(data, index=['BS', 'IM', 'MT', 'SL', 'MG'])\n",
+        "\n",
+        "# Access rows using labels\n",
+        "print(df.loc['IM'])\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    'Band': [\n",
+        "        'Black Sabbath', 'Iron Maiden', 'Metallica',\n",
+        "        'Slayer', 'Megadeth', 'Angra',\n",
+        "        ],\n",
+        "    'Country': [\n",
+        "        'UK', 'UK', 'USA',\n",
+        "        'USA', 'USA', 'Brazil',\n",
+        "        ],\n",
+        "    'Year Formed': [\n",
+        "        1968, 1975, 1981,\n",
+        "        1981, 1983, 1991,\n",
+        "        ],\n",
+        "    'Genre': [\n",
+        "        'Heavy Metal', 'Heavy Metal',\n",
+        "        'Thrash Metal', 'Thrash Metal',\n",
+        "        'Thrash Metal', 'Power Metal',\n",
+        "        ],\n",
+        "    }\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Find bands formed after 1975 and based in the USA\n",
+        "filtered_bands = df.loc[(df['Year Formed'] > 1975) & (df['Country']\n",
+        "                        == 'USA')]\n",
+        "print(filtered_bands)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Xu_wISpOGRg9",
+        "outputId": "d139653f-cd07-4732-a19c-186f4161a43b"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "        Band Country  Year Formed         Genre\n",
+            "2  Metallica     USA         1981  Thrash Metal\n",
+            "3     Slayer     USA         1981  Thrash Metal\n",
+            "4   Megadeth     USA         1983  Thrash Metal\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    'Band': [\n",
+        "        'Black Sabbath', 'Iron Maiden', 'Metallica',\n",
+        "        'Slayer', 'Megadeth', 'Angra',\n",
+        "        ],\n",
+        "    'Country': [\n",
+        "        'UK', 'UK', 'USA',\n",
+        "        'USA', 'USA', 'Brazil',\n",
+        "        ],\n",
+        "    'Year Formed': [\n",
+        "        1968, 1975, 1981,\n",
+        "        1981, 1983, 1991,\n",
+        "        ],\n",
+        "    'Genre': [\n",
+        "        'Heavy Metal', 'Heavy Metal',\n",
+        "        'Thrash Metal', 'Thrash Metal',\n",
+        "        'Thrash Metal', 'Power Metal',\n",
+        "        ],\n",
+        "    }\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Get the genre of the band in the 3rd row (index 2)\n",
+        "genre_of_metallica = df.iloc[2, 3]\n",
+        "print(f\"Genre of Metallica: {genre_of_metallica}\")\n",
+        "print()\n",
+        "\n",
+        "# Get all details of the band in the 5th row (index 4)\n",
+        "details_of_megadeth = df.iloc[4]\n",
+        "print(\"Details of Megadeth:\")\n",
+        "print(details_of_megadeth)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oli3lXfuGdPA",
+        "outputId": "543bd528-040e-46e2-e50a-e8bc20f32d47"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Genre of Metallica: Thrash Metal\n",
+            "\n",
+            "Details of Megadeth:\n",
+            "Band               Megadeth\n",
+            "Country                 USA\n",
+            "Year Formed            1983\n",
+            "Genre          Thrash Metal\n",
+            "Name: 4, dtype: object\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Try it yourself:\n",
+        "We want to find the OGs of US Heavy Metal in our dataset. Help us out.\n",
+        "Use .loc[] with multiple conditions to filter and display all bands:\n",
+        "From the USA.\n",
+        "Formed before 1982.\n",
+        "Use .iloc[] with slicing to display the first three rows and their first two columns.\n"
+      ],
+      "metadata": {
+        "id": "w6bLWan9Gyej"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    \"Band\": [\n",
+        "        \"Pantera\", \"Sepultura\", \"Dream Theater\",\n",
+        "        \"Anthrax\", \"Death\", \"Exodus\",\n",
+        "        \"Judas Priest\", \"Testament\"\n",
+        "    ],\n",
+        "    \"Country\": [\n",
+        "        \"USA\", \"Brazil\", \"USA\",\n",
+        "        \"USA\", \"USA\", \"USA\",\n",
+        "        \"UK\", \"USA\"\n",
+        "    ],\n",
+        "    \"Year Formed\": [\n",
+        "        1981, 1984, 1985,\n",
+        "        1981, 1983, 1979,\n",
+        "        1969, 1983\n",
+        "    ],\n",
+        "    \"Genre\": [\n",
+        "        \"Groove Metal\", \"Thrash Metal\", \"Progressive Metal\",\n",
+        "        \"Thrash Metal\", \"Death Metal\", \"Thrash Metal\",\n",
+        "        \"Heavy Metal\", \"Thrash Metal\"\n",
+        "    ]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Step 1: Use .loc[] with multiple conditions to filter bands from the USA formed before 1982\n",
+        "filtered_bands = df.loc[(df[\"Country\"] == \"USA\") & (df[\"Year Formed\"] < 1982)]\n",
+        "print(filtered_bands)\n",
+        "\n",
+        "# Step 2: Use .iloc[] with slicing to display the first three rows and their first two columns\n",
+        "first_three_rows = df.iloc[:3, :2]\n",
+        "print(first_three_rows)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uvf0m64BGzGj",
+        "outputId": "e009d3d1-0dd1-4f16-ceb3-cc15ca14f432"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "      Band Country  Year Formed         Genre\n",
+            "0  Pantera     USA         1981  Groove Metal\n",
+            "3  Anthrax     USA         1981  Thrash Metal\n",
+            "5   Exodus     USA         1979  Thrash Metal\n",
+            "            Band Country\n",
+            "0        Pantera     USA\n",
+            "1      Sepultura  Brazil\n",
+            "2  Dream Theater     USA\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Try it yourself:\n",
+        "Let’s refine the heavy metal bands dataset to focus on specific data points and add calculated insights. Your tasks are:\n",
+        "Remove the Country and Genre columns from the dataset.\n",
+        "Add a new column named Albums per Decade, calculated as the number of albums divided by the number of decades since the band was formed.\n",
+        "Modify the Albums per Decade column by doubling its values to reflect hypothetical re-releases."
+      ],
+      "metadata": {
+        "id": "2y5PMAeRHhDU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    'Band': [\n",
+        "        'Pantera', 'Sepultura', 'Dream Theater', 'Anthrax', 'Death',\n",
+        "        'Exodus', 'Judas Priest', 'Testament',\n",
+        "        ],\n",
+        "    'Country': [\n",
+        "        'USA', 'Brazil', 'USA', 'USA', 'USA', 'USA',\n",
+        "        'UK', 'USA',\n",
+        "        ],\n",
+        "    'Year Formed': [\n",
+        "        1981, 1984, 1985, 1981, 1983, 1979, 1969, 1983,\n",
+        "        ],\n",
+        "    'Genre': [\n",
+        "        'Groove Metal', 'Thrash Metal', 'Progressive Metal',\n",
+        "        'Thrash Metal', 'Death Metal', 'Thrash Metal',\n",
+        "        'Heavy Metal', 'Thrash Metal',\n",
+        "        ],\n",
+        "    'Albums Released': [\n",
+        "        9, 15, 14, 11, 7, 10, 18, 12,\n",
+        "        ],\n",
+        "    }\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Step 1: Remove the \"Country\" and \"Genre\" columns\n",
+        "df = df.drop(columns=['Country', 'Genre'])\n",
+        "print(df)\n",
+        "# Step 2: Add a new column \"Albums per Decade\"\n",
+        "df['Albums per Decade'] = df['Albums Released'] / ((2023 - df['Year Formed'])/10)\n",
+        "print(df)\n",
+        "# Step 3: Modify the \"Albums per Decade\" column\n",
+        "df['Albums per Decade'] = df['Albums per Decade'] * 2\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eSrkgBRKHhX8",
+        "outputId": "1a959d47-3038-49e4-e638-3d238df48429"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "            Band  Year Formed  Albums Released\n",
+            "0        Pantera         1981                9\n",
+            "1      Sepultura         1984               15\n",
+            "2  Dream Theater         1985               14\n",
+            "3        Anthrax         1981               11\n",
+            "4          Death         1983                7\n",
+            "5         Exodus         1979               10\n",
+            "6   Judas Priest         1969               18\n",
+            "7      Testament         1983               12\n",
+            "            Band  Year Formed  Albums Released  Albums per Decade\n",
+            "0        Pantera         1981                9           0.214286\n",
+            "1      Sepultura         1984               15           0.384615\n",
+            "2  Dream Theater         1985               14           0.368421\n",
+            "3        Anthrax         1981               11           0.261905\n",
+            "4          Death         1983                7           0.175000\n",
+            "5         Exodus         1979               10           0.227273\n",
+            "6   Judas Priest         1969               18           0.333333\n",
+            "7      Testament         1983               12           0.300000\n",
+            "            Band  Year Formed  Albums Released  Albums per Decade\n",
+            "0        Pantera         1981                9           0.428571\n",
+            "1      Sepultura         1984               15           0.769231\n",
+            "2  Dream Theater         1985               14           0.736842\n",
+            "3        Anthrax         1981               11           0.523810\n",
+            "4          Death         1983                7           0.350000\n",
+            "5         Exodus         1979               10           0.454545\n",
+            "6   Judas Priest         1969               18           0.666667\n",
+            "7      Testament         1983               12           0.600000\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Try it yourself:\n",
+        "Write a function named update_setlist that updates a band's setlist by removing one song and adding another. The function should:\n",
+        "Accept the following parameters:\n",
+        "setlist: A list of songs to update, with a default argument provided.\n",
+        "song_to_remove: The song to be removed from the setlist.\n",
+        "song_to_add: The song to be added to the setlist.\n",
+        "If the song to be removed exists in the setlist, remove it. Otherwise, do nothing.\n",
+        "Add the new song to the setlist.\n",
+        ""
+      ],
+      "metadata": {
+        "id": "lLeD5S53IcbG"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Initial setlist\n",
+        "setlist = [\n",
+        "    \"Rebirth\", \"Nova Era\", \"Temple of Shadows\",\n",
+        "    \"Angels Cry\", \"Carry On\", \"Holy Land\"\n",
+        "]\n",
+        "\n",
+        "def update_setlist(setlist=initial_setlist, song_to_remove, song_to_add):\n",
+        "    if song_to_remove in setlist:\n",
+        "        setlist.remove(song_to_remove)\n",
+        "    setlist.append(song_to_add)\n",
+        "    return setlist\n",
+        "song_to_remove = \"Temple of Shadows\",\n",
+        "song_to_add = \"Nothing to Say\"\n",
+        "\n",
+        "# Implement the function logic here\n",
+        "def update_setlist(setlist, song_to_remove, song_to_add):\n",
+        "\n",
+        "# Function call\n",
+        "updated_setlist = update_setlist() #Call your function proerly here\n",
+        "\n",
+        "# Print the updated setlist\n",
+        "print(\"Updated Setlist:\", updated_setlist)"
+      ],
+      "metadata": {
+        "id": "wKvKSvmJIc2m"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Try it yourself:\n",
+        "Now you will be performing basic statistical analysis on the Heavy Metal Bands dataset for the first time. So calculate the following:\n",
+        "Total Albums Released: Use .sum() to calculate the total number of albums released by all bands.\n",
+        "Average Albums Released: Use .mean() to calculate the average number of albums released.\n",
+        "Maximum Albums Released: Use .max() to find the highest number of albums released by any band."
+      ],
+      "metadata": {
+        "id": "Kes7hsEtUCr2"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    \"Band\": [ \"Pantera\", \"Sepultura\", \"Dream Theater\", \"Anthrax\",\n",
+        "                    \"Death\", \"Exodus\", \"Judas Priest\", \"Testament\" ],\n",
+        "    \"Country\": [ \"USA\", \"Brazil\", \"USA\", \"USA\", \"USA\", \"USA\", \"UK\", \"USA\" ],\n",
+        "    \"Year Formed\": [ 1981, 1984, 1985, 1981, 1983, 1979, 1969, 1983 ],\n",
+        "    \"Genre\": [ \"Groove Metal\", \"Thrash Metal\", \"Progressive Metal\",\n",
+        "        \"Thrash Metal\", \"Death Metal\", \"Thrash Metal\",\n",
+        "        \"Heavy Metal\", \"Thrash Metal\" ],\n",
+        "    \"Albums Released\": [ 9, 15, 14, 11, 7, 10, 18, 12 ]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Calculate the total albums released\n",
+        "total_albums_released = df[\"Albums Released\"].sum()\n",
+        "print(f\"Total Albums Released: {total_albums_released}\")\n",
+        "# Calculate the average albums released\n",
+        "average_albums_released = df[\"Albums Released\"].mean()\n",
+        "print(f\"Average Albums Released: {average_albums_released}\")\n",
+        "# Find the maximum albums released\n",
+        "max_albums_released = df[\"Albums Released\"].max()\n",
+        "print(f\"Maximum Albums Released: {max_albums_released}\")"
+      ],
+      "metadata": {
+        "id": "6XRE68h3UDBN"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Try it yourself:\n",
+        "Let’s organize the Heavy Metal Bands dataset by performing the following operations:\n",
+        "Sort by Albums Released:\n",
+        "Use .sort_values() to sort the DataFrame by the Albums Released column in descending order.\n",
+        "Set inplace=True to modify the original DataFrame.\n",
+        "Reindex the DataFrame:\n",
+        "Reset the indices of the DataFrame after sorting using .reset_index() with drop=True."
+      ],
+      "metadata": {
+        "id": "HMmCy81UUeou"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "data = {\n",
+        "    \"Band\": [ \"Pantera\", \"Sepultura\", \"Dream Theater\", \"Anthrax\",\n",
+        "                    \"Death\", \"Exodus\", \"Judas Priest\", \"Testament\" ],\n",
+        "    \"Country\": [ \"USA\", \"Brazil\", \"USA\", \"USA\", \"USA\", \"USA\", \"UK\", \"USA\" ],\n",
+        "    \"Year Formed\": [ 1981, 1984, 1985, 1981, 1983, 1979, 1969, 1983 ],\n",
+        "    \"Genre\": [ \"Groove Metal\", \"Thrash Metal\", \"Progressive Metal\",\n",
+        "        \"Thrash Metal\", \"Death Metal\", \"Thrash Metal\",\n",
+        "        \"Heavy Metal\", \"Thrash Metal\" ],\n",
+        "    \"Albums Released\": [ 9, 15, 14, 11, 7, 10, 18, 12 ]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Step 1: Sort by \"Albums Released\" in descending order\n",
+        "df.sort_values(by=\"Albums Released\", ascending=False, inplace=True)\n",
+        "print(df)\n",
+        "# Step 2: Reset the index\n",
+        "df.reset_index(drop=True, inplace=True)\n",
+        "print(df)\n",
+        "\n",
+        "# Step 2: Reset the index\n",
+        "df.reset_index(drop=True, inplace=True)"
+      ],
+      "metadata": {
+        "id": "k1hvyLS9Ufb-"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
